@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>
+      Intro to MapView - Create a 2D map | Sample | ArcGIS API for JavaScript
+      4.18
+    </title>
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+      #info {
+        background-color: black;
+        opacity: 0.75;
+        color: orange;
+        font-size: 12pt;
+        padding: 8px;
+        visibility: hidden;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.18/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.18/"></script>
+
+    <script>
+      require(["esri/Map", "esri/views/MapView", "esri/layers/VectorTileLayer", "esri/layers/GeoJSONLayer", "esri/widgets/LayerList",], function (Map, MapView, VectorTileLayer, GeoJSONLayer, LayerList) {
+        
+        const tileLayer = new VectorTileLayer({
+          title: "全国市区町村界データ (ベクタータイル)",
+          url: "./style.json",
+          opacity: 0.5
+        });
+        
+        const geoJSONLayer = new GeoJSONLayer({
+            title: "全国市区町村界データ (GeoJSON)",
+            url: "./japan_ver821.geojson",
+            opacity: 0.8,
+            visible: false
+        });
+        
+        var map = new Map({
+          basemap: "topo-vector",
+          layers: [geoJSONLayer, tileLayer]
+        });
+
+        var view = new MapView({
+          container: "viewDiv",
+          map: map,
+          zoom: 5,
+          center: [139.69167,35.68944] // longitude, latitude
+        });
+
+        view.ui.add("info", "bottom-right");
+
+        view
+          .when()
+          .then(function () {
+            var layerList = new LayerList({
+              view: view
+            });
+            // Add widget to the top right corner of the view
+            view.ui.add(layerList, "top-right");
+            return tileLayer.when();
+          })
+          .then(function (layer) {
+            return view.whenLayerView(layer);
+          })
+          .then(function (layerView) {
+            view.on(["pointer-move", "pointer-down"], eventHandler);
+
+            function eventHandler(event) {
+              // only include graphics from tileLayer in the hitTest
+              const opts = {
+                include: tileLayer
+              };
+              // the hitTest() checks to see if any graphics from the tileLayer
+              // intersect the x, y coordinates of the pointer
+              view.hitTest(event, opts).then(getGraphics);
+            }
+
+            function getGraphics(response) {
+                
+                if (response.results.length) {
+                  const graphic = response.results[0].graphic;
+                  const mapPoint = response.results[0].mapPoint;
+
+                  const attributes = graphic.attributes;
+
+                  const layerName = attributes.layerName;
+                  const latitude = mapPoint.latitude;
+                  const longitude = mapPoint.longitude;
+
+                  document.getElementById("info").style.visibility = "visible";
+                  document.getElementById("name").innerHTML = layerName;
+                  document.getElementById("lat").innerHTML =  "緯度： " + latitude;
+                  document.getElementById("lon").innerHTML =  "経度： " + longitude;
+
+              } else {
+                document.getElementById("info").style.visibility = "hidden";
+              }
+            }
+
+          });
+
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+    <div id="info">
+      <span id="name"></span><br />
+      <span id="lat"></span><br />
+      <span id="lon"></span>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "center": [
+    139.754,
+    35.746
+  ],
+  "glyphs": "https://vectortiles.xyz/fonts/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "japan_ver821",
+      "paint": {
+        "fill-color": "#0000FF",
+        "fill-outline-color": "#C0C0C0"
+      },
+      "source": "v",
+      "source-layer": "japan_ver821",
+      "type": "fill"
+    }
+  ],
+  "sources": {
+    "v": {
+      "attribution": "全国市区町村界データを使用して作成",
+      "tiles": [
+        "./zxy/{z}/{x}/{y}.pbf"
+      ],
+      "type": "vector"
+    }
+  },
+  "sprite": "./unite-sprite/sprite",
+  "version": 8,
+  "zoom": 8.22
+}
