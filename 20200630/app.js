@@ -8,7 +8,7 @@ import {Tile3DLayer} from '@deck.gl/geo-layers';
 import {I3SLoader} from '@loaders.gl/i3s';
 
 // How to get mapbox token https://docs.mapbox.com/help/how-mapbox-works/access-tokens/
-const MAPBOX_TOKEN = 'pk.eyJ1IjoidmFsdWVjcmVhdGlvbiIsImEiOiJjanM0Z21xamQwNHRrM3lueXZrOHBxZmNmIn0.oF6cKsx1z4NzUNiJ7RTXNQ'; // add your Mapbox token here
+const MAPBOX_TOKEN = 'pk.eyJ1IjoidmFsdWVjcmVhdGlvbiIsImEiOiJja2swcm9pdWMwazk2MnB0ZzZ5NTVwMXAxIn0.9klPq_GB5cZ0lRZVdZR2_g'; // add your Mapbox token here
 
 const INITIAL_VIEW_STATE = {
   longitude: -120,
