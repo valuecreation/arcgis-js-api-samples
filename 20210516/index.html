@@ -1,0 +1,62 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Japan Street Custom Basemap</title>
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.19/"></script>
+
+  <script>
+    require([
+      "esri/config",
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/layers/VectorTileLayer",
+      "esri/Basemap"
+    ], function(esriConfig, Map, MapView, VectorTileLayer, Basemap) {
+
+      esriConfig.apiKey = "AAPKaccc0b5f2dcf4f4e8c1adc5d2cbdd2d2gaw3u-Y5awzEH5KK04kv1dKs5tluamN6YYWGn0nKOM6Ac8NpaVBicKBvCGu9uLN1";
+      
+      var vtlJP = new VectorTileLayer({
+        url: "https://www.arcgis.com/sharing/rest/content/items/001a6ce28431449da6c343c702eb5809/resources/styles/root.json"
+      });
+      
+      var bmJP = new Basemap({
+        baseLayers: [vtlJP]
+      });
+      
+      const map = new Map({
+        basemap: bmJP
+      });
+      
+      const view = new MapView({
+        map: map,
+        center: [139.76, 35.69],
+        zoom: 13, 
+        container: "viewDiv",
+        constraints: {
+          snapToZoom: false
+        }
+      });
+      
+    });
+  </script>
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+
+</html>
