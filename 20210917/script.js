@@ -1,5 +1,6 @@
 import { gpx } from "https://unpkg.com/@tmcw/togeojson?module";
 
+import esriConfig from "esri/config.js";
 import EsriMap from "esri/Map.js";
 import SceneView from "esri/views/SceneView.js";
 import ElevationProfile from "esri/widgets/ElevationProfile.js";
@@ -9,6 +10,8 @@ import { LineSymbol3D, LineSymbol3DLayer, PointSymbol3D, IconSymbol3DLayer } fro
 import { Polyline, Point } from "esri/geometry.js";
 import ElevationProfileLineInput from "esri/widgets/ElevationProfile/ElevationProfileLineInput.js";
 import Graphic from "esri/Graphic.js";
+
+esriConfig.apiKey = "AAPKaccc0b5f2dcf4f4e8c1adc5d2cbdd2d2gaw3u-Y5awzEH5KK04kv1dKs5tluamN6YYWGn0nKOM6Ac8NpaVBicKBvCGu9uLN1";
 
 const map = new EsriMap({
   basemap: "satellite",
