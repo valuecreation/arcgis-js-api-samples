@@ -24,14 +24,14 @@
       require([
         "esri/config",
         "esri/Map",
-        "esri/WebMap",
         "esri/views/MapView",
+        "esri/widgets/Home",
         "esri/layers/FeatureLayer"
       ], (
         esriConfig,
         Map,
-        WebMap,
         MapView,
+        Home,
         FeatureLayer
       ) => {
 
@@ -71,6 +71,18 @@
                         }
                     ]
                 }]
+            },
+            renderer: {
+              type: "simple",
+              symbol: {
+                type: "simple-marker",
+                size: 10,
+                color: "teal",
+                outline: {
+                  color: "white",
+                  width: 0.5
+                }
+              }
             }
         });
 
@@ -130,6 +142,13 @@
             snapToZoom: false
           }
         });
+
+        view.ui.add(
+          new Home({
+            view: view
+          }),
+          "top-left"
+        );
 
       });
     </script>
