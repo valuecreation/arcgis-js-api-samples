@@ -3,6 +3,9 @@ const CopyPlugin = require('copy-webpack-plugin');
 const jsapi = '@arcgis/core';
 
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/vuejs/'
+    : '/',
   configureWebpack: {
     plugins: [
       new CopyPlugin({
