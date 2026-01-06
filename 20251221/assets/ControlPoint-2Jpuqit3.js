@@ -1,0 +1,1 @@
+import{eh as r,af as t,ag as s,dK as a,ai as p}from"./index-B08XdrMj.js";let o=class extends r{constructor(e){super(e),this.sourcePoint=null,this.mapPoint=null}};t([s()],o.prototype,"sourcePoint",void 0),t([s({type:a})],o.prototype,"mapPoint",void 0),o=t([p("esri.layers.support.ControlPoint")],o);export{o as p};
